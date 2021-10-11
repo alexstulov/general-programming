@@ -1,7 +1,5 @@
-const replaceOnes = (num) => {
-    switch(num) {
-        case 0:
-            return 'zero';
+const replaceOnes = num => {
+    switch (num) {
         case 1:
             return 'one';
         case 2:
@@ -20,13 +18,14 @@ const replaceOnes = (num) => {
             return 'eight';
         case 9:
             return 'nine';
+        case 0:
         default:
             return '';
     }
 }
 
-const replaceTens = (num) => {
-    switch(num) {
+const replaceTens = num => {
+    switch (num) {
         case 10:
             return 'ten';
         case 11:
@@ -68,9 +67,19 @@ const replaceTens = (num) => {
     }
 }
 
-const numberToEnglish = (num) => {
-    const topLimit = 99999;
-    if (Number.isNaN(num) || !Number.isInteger(num) || num < 0 || num > topLimit) {
+const convertTens = num => {
+    if (num < 10) {
+        return replaceOnes(num);
+    } else if (num < 20) {
+        return replaceTens(num);
+    } else {
+        const tempNum = num.toString()
+        return `${replaceTens(parseInt(tempNum[0]+'0'))} ${replaceOnes(parseInt(tempNum[1]))}`.trim();
+    }
+}
+
+const numberToEnglish = num => {
+    if (Number.isNaN(num) || !Number.isInteger(num) || num < 0 || num > 99999) {
         return '';
     }
 
@@ -78,42 +87,27 @@ const numberToEnglish = (num) => {
         return 'zero';
     }
 
-    const tenThousands = parseInt(num / 10000);
-    const thousands = parseInt((num - tenThousands * 10000) / 1000);
-    const thousandTensNThousandOnes = parseInt([tenThousands, thousands].join(''));
-    
-    const hundreds = parseInt((num - tenThousands * 10000 - thousands * 1000) / 100);
-    const tens = parseInt((num - tenThousands * 10000 - thousands * 1000 - hundreds * 100) / 10);
-    const ones = num - tenThousands * 10000 - thousands * 1000 - hundreds * 100 - tens * 10;
-    
-    const thousandTensName = 0 <= thousandTensNThousandOnes && thousandTensNThousandOnes < 20 ? replaceTens(thousandTensNThousandOnes) : replaceTens(tenThousands * 10);
-    const thousandOnesName = tenThousands === 0 || thousandTensNThousandOnes > 20 ? replaceOnes(thousands) : '';
+    let stringNum = num.toString();
+    while (stringNum.length < 5) {
+        stringNum = `0${stringNum}`;
+    }
 
-    const hundredsName = replaceOnes(hundreds);
-    const tensNOnes = parseInt([tens, ones].join(''));
-    const tensName = 0 <= tensNOnes && tensNOnes < 20 ? replaceTens(tensNOnes) : replaceTens(tens * 10);
-    const onesName = tens === 0 || tensNOnes > 20 ? replaceOnes(ones) : '';
+    const thousands = convertTens(parseInt(stringNum.substr(0,2)));
+    const hundreds = replaceOnes(parseInt(stringNum.substr(2,1)));
+    const tens = convertTens(parseInt(stringNum.substr(3,2)));
 
-    let numberName = '';
-    if (thousandTensName && thousandTensName !== 'zero') {
-        numberName += `${thousandTensName} `;
+    let result = '';
+    if (thousands) {
+        result += `${thousands} thousand `;
     }
-    if (thousandOnesName && thousandOnesName !== 'zero') {
-        numberName += `${thousandOnesName} `;
+    if (hundreds) {
+        result += `${hundreds} hundred `;
     }
-    if (numberName) {
-        numberName += 'thousand ';
+    if (tens) {
+        result += tens;
     }
-    if (hundredsName && hundredsName !== 'zero') {
-        numberName += `${hundredsName} hundred `;
-    }
-    if (tensName && tensName !== 'zero') {
-        numberName += `${tensName} `;
-    }
-    if (onesName && onesName !== 'zero') {
-        numberName += `${onesName} `;
-    }
-    return numberName.trim();    
-};
+    
+    return result.trim();
+}
 
 module.exports = numberToEnglish;

@@ -1,28 +1,17 @@
-const path = require('path');
+const shallowEqual = require('./shallowEqual');
 const hexStringToRGB = require('../code/hexStringToRGB');
 
-const shallowEqual = (object1, object2) => {
-  const keys1 = Object.keys(object1);
-  const keys2 = Object.keys(object2);
-  let result = true;
-  if (keys1.length !== keys2.length) {
-    result = false;
-  }
-
-  for (let key of keys1) {
-    if (object1[key] !== object2[key]) {
-      result = false;
-    }
-  }
-
-  const successColor = "\x1b[32m";
-  const errorColor = "\x1b[31m";
-  if (result) {
-    console.log(successColor, `${path.relative('./', 'hexStringToRGB.js: ')}${JSON.stringify(object1)} is shallow equal to ${JSON.stringify(object2)}`);
-  } else {
-    console.log(errorColor, `${JSON.stringify(object1)} is not shallow equal to ${JSON.stringify(object2)}`);
-  }
-}
+/**
+ * https://www.codewars.com/kata/5282b48bb70058e4c4000fa7/train/javascript
+ * 
+ * Convert A Hex String To RGB
+ * 
+ * When working with color values it can sometimes be useful to extract the individual red, green, and blue (RGB) component values for a color. Implement a function that meets these requirements:
+ * Accepts a case-insensitive hexadecimal color string as its parameter (ex. "#FF9933" or "#ff9933")
+ * Returns a Map<String, int> with the structure {r: 255, g: 153, b: 51} where r, g, and b range from 0 through 255
+ * Note: your implementation does not need to support the shorthand form of hexadecimal notation (ie "#FFF")
+ * 
+ */
 
 const hexStringToRGBTest = function () {
   shallowEqual(hexStringToRGB("#FF9933"), { r: 255, g: 153, b: 51 });

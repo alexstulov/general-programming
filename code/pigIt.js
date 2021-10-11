@@ -1,39 +1,43 @@
+const LETTER_REGEX = /[A-Za-z]/;
+const NON_LETTER_REGEX = /[^A-Za-z]/;
+
 const convertWord = word => `${word.substr(1)}${word[0]}ay`;
 
-const processSeparator = (str, i) => {
+const processSeparator = (sentense, charIndex) => {
     let tempSeparator = '';
-    for (let j = i; j < str.length; j++) {
-        tempSeparator+=str[j];
-        if (str[j].match(/[^A-Za-z]/)) {
-            i = j;
+    let nextLetter = '';
+    for (let j = charIndex; j < sentense.length; j++) {
+        tempSeparator+=sentense[j];
+        if (sentense[j].match(NON_LETTER_REGEX)) {
+            nextLetter = j;
             break;
         }
     }
-    return [i, tempSeparator];
+    return [nextLetter, tempSeparator];
 };
 
-const pigIt = str => {
-    if (!str || !str.match(/[A-Za-z]/)) {
-        return str;
+const pigIt = sentense => {
+    if (!sentense || !sentense.match(LETTER_REGEX)) {
+        return sentense;
     }
 
     let result = '';
-    let tempText = '';
+    let word = '';
 
-    for (let i = 0; i < str.length; i++) {
-        if (str[i].match(/[A-Za-z]/)) {
-            tempText+=str[i];
+    for (let charIndex = 0; charIndex < sentense.length; charIndex++) {
+        if (sentense[charIndex].match(LETTER_REGEX)) {
+            word+=sentense[charIndex];
         } else {
-            result += tempText ? convertWord(tempText) : '';
-            tempText = '';
-            let [tempI, tempSeparator] = processSeparator(str, i);
-            i = tempI;
+            result += word ? convertWord(word) : '';
+            word = '';
+            const [tempCharIndex, tempSeparator] = processSeparator(sentense, charIndex);
+            charIndex = tempCharIndex;
             result += tempSeparator;
         }
     }
 
-    if (tempText) {
-        result += convertWord(tempText);
+    if (word) {
+        result += convertWord(word);
     }
 
     return result;

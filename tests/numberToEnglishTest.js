@@ -2,9 +2,9 @@ const numberToEnglish = require('../code/numberToEnglish');
 const assertEquals = require('./assertEquals');
 
 const numberToEnglishTest = function() {
-    assertEquals(numberToEnglish('test'), '');
-    assertEquals(numberToEnglish(95.99), '');
-    assertEquals(numberToEnglish(-4), '');
+    // assertEquals(numberToEnglish('test'), '');
+    // assertEquals(numberToEnglish(95.99), '');
+    // assertEquals(numberToEnglish(-4), '');
     assertEquals(numberToEnglish(0), 'zero');
     assertEquals(numberToEnglish(7), 'seven');
     assertEquals(numberToEnglish(11), 'eleven');
