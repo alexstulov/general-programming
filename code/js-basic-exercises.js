@@ -102,6 +102,31 @@ const makeVar = name => {
   return window[name]
 }
 
+const getFileExtension = fileName => {
+  const blocks = fileName.split('.')
+  const extension = blocks.pop()
+  if (extension.length < 2 || blocks.length === 0 || !blocks[0].length) {
+    return 'Invalid file name'
+  }
+
+  return extension
+}
+
+const getDiffWithThirteen = num => {
+  return num > 13 ? Math.abs(num - 13) * 2 : num - 13
+}
+
+const sumNumbers = (num1 = 0, num2 = 0) => num1 === num2 ? num1 * 6 : num1 + num2
+
+const ABS_DIFF_NUM = 19
+const absDifference = (num = 0) => num > ABS_DIFF_NUM ? Math.abs(num - ABS_DIFF_NUM) * 3 : Math.abs(num - ABS_DIFF_NUM)
+
+const isFifty = (num1 = 0, num2 = 0) => (num1 === 50 || num2 === 50 || num1 + num2 === 50)
+
+const isWithinRange = (num = 0) => ((num >= 20 && num <= 100) || num === 400)
+
+const arePositiveAndNegative = (num1 = 0, num2 = 0) => ((num1 > 0 && num2 < 0) || (num1 < 0 && num2 > 0))
+
 module.exports = {
   getCurrentDateNTime,
   triangleAreaBySides,
@@ -113,5 +138,12 @@ module.exports = {
   multiplyNDivide,
   celsiusToFahrenheitNBack,
   getURL,
-  makeVar
+  makeVar,
+  getFileExtension,
+  getDiffWithThirteen,
+  sumNumbers,
+  absDifference,
+  isFifty,
+  isWithinRange,
+  arePositiveAndNegative
 }

@@ -11,7 +11,14 @@ const {
   multiplyNDivide,
   celsiusToFahrenheitNBack,
   getURL,
-  makeVar
+  makeVar,
+  getFileExtension,
+  getDiffWithThirteen,
+  sumNumbers,
+  absDifference,
+  isFifty,
+  isWithinRange,
+  arePositiveAndNegative
 } = require('../code/js-basic-exercises.js')
 
 test('Date and time practice', () => {
@@ -57,6 +64,54 @@ test('Math practice', () => {
 
   expect(celsiusToFahrenheitNBack(60)).toBe(140)
   expect(celsiusToFahrenheitNBack(45, 'F')).toBe(7.222222222222222)
+
+  expect(getDiffWithThirteen(0)).toBe(-13)
+  expect(getDiffWithThirteen(12)).toBe(-1)
+  expect(getDiffWithThirteen(13)).toBe(0)
+  expect(getDiffWithThirteen(14)).toBe(2)
+  expect(getDiffWithThirteen(100)).toBe(174)
+
+  expect(sumNumbers()).toBe(0)
+  expect(sumNumbers(1, 2)).toBe(3)
+  expect(sumNumbers(5, 5)).toBe(30)
+  expect(sumNumbers(6, 6)).toBe(36)
+  expect(sumNumbers(56)).toBe(56)
+
+  expect(absDifference()).toBe(19)
+  expect(absDifference(5)).toBe(14)
+  expect(absDifference(50)).toBe(93)
+
+  expect(isFifty()).toBe(false)
+  expect(isFifty(5, 10)).toBe(false)
+  expect(isFifty(50, 10)).toBe(true)
+  expect(isFifty(5, 50)).toBe(true)
+  expect(isFifty(5, 45)).toBe(true)
+
+  expect(isWithinRange()).toBe(false)
+  expect(isWithinRange(10)).toBe(false)
+  expect(isWithinRange(20)).toBe(true)
+  expect(isWithinRange(50)).toBe(true)
+  expect(isWithinRange(100)).toBe(true)
+  expect(isWithinRange(250)).toBe(false)
+  expect(isWithinRange(400)).toBe(true)
+
+  expect(arePositiveAndNegative()).toBe(false)
+  expect(arePositiveAndNegative(0)).toBe(false)
+  expect(arePositiveAndNegative(10)).toBe(false)
+  expect(arePositiveAndNegative(-10)).toBe(false)
+  expect(arePositiveAndNegative(-10, 100)).toBe(true)
+  expect(arePositiveAndNegative(10, -100)).toBe(true)
+  expect(arePositiveAndNegative(-10, -100)).toBe(false)
+  expect(arePositiveAndNegative(10, 100)).toBe(false)
+})
+
+test('String practice', () => {
+  expect(getFileExtension('test.exe')).toBe('exe')
+  expect(getFileExtension('_.rar')).toBe('rar')
+  expect(getFileExtension('.doc')).toBe('Invalid file name')
+  expect(getFileExtension('asdf.')).toBe('Invalid file name')
+  expect(getFileExtension('qwer')).toBe('Invalid file name')
+  expect(getFileExtension('')).toBe('Invalid file name')
 })
 
 test('Browser API and stuff', () => {
