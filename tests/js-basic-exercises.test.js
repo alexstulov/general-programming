@@ -28,8 +28,8 @@ const {
 test('Date and time practice', () => {
   console.log = jest.fn()
   getCurrentDateNTime()
-  expect(console.log.mock.calls[0][0]).toMatch(new RegExp('Today is: .*'))
-  expect(console.log.mock.calls[0][1]).toMatch(new RegExp('Current time is: .*'))
+  expect(console.log.mock.calls[0][0]).toMatch(/Today is: .*/i)
+  expect(console.log.mock.calls[0][1]).toMatch(/Current time is: .*/)
 
   expect(isLeap(2023)).toBe(false)
   expect(isLeap(2022)).toBe(false)
