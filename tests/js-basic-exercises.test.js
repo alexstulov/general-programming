@@ -18,7 +18,11 @@ const {
   absDifference,
   isFifty,
   isWithinRange,
-  arePositiveAndNegative
+  arePositiveAndNegative,
+  checkPy,
+  dropChar,
+  switchFirstNLast,
+  isMultipleThreeOrSeven
 } = require('../code/js-basic-exercises.js')
 
 test('Date and time practice', () => {
@@ -103,6 +107,14 @@ test('Math practice', () => {
   expect(arePositiveAndNegative(10, -100)).toBe(true)
   expect(arePositiveAndNegative(-10, -100)).toBe(false)
   expect(arePositiveAndNegative(10, 100)).toBe(false)
+
+  expect(isMultipleThreeOrSeven()).toBe(true)
+  expect(isMultipleThreeOrSeven(3)).toBe(true)
+  expect(isMultipleThreeOrSeven(7)).toBe(true)
+  expect(isMultipleThreeOrSeven(21)).toBe(true)
+  expect(isMultipleThreeOrSeven(2)).toBe(false)
+  expect(isMultipleThreeOrSeven(4)).toBe(false)
+  expect(isMultipleThreeOrSeven(5)).toBe(false)
 })
 
 test('String practice', () => {
@@ -112,6 +124,23 @@ test('String practice', () => {
   expect(getFileExtension('asdf.')).toBe('Invalid file name')
   expect(getFileExtension('qwer')).toBe('Invalid file name')
   expect(getFileExtension('')).toBe('Invalid file name')
+
+  expect(checkPy('')).toBe('Py')
+  expect(checkPy('Python')).toBe('Python')
+  expect(checkPy('pyramid')).toBe('pyramid')
+  expect(checkPy('Pyjamas')).toBe('Pyjamas')
+  expect(checkPy('some string')).toBe('Pysome string')
+
+  expect(dropChar('test', 2)).toBe('tet')
+  expect(dropChar('', 2)).toBe('')
+  expect(dropChar('aaaaa', 5)).toBe('aaaaa')
+  expect(dropChar('aaaaa', 3)).toBe('aaaa')
+
+  expect(() => { switchFirstNLast('') }).toThrow('str.length should be > 1')
+  expect(switchFirstNLast('a')).toBe('a')
+  expect(switchFirstNLast('ab')).toBe('ba')
+  expect(switchFirstNLast('abc')).toBe('cba')
+  expect(switchFirstNLast('test')).toBe('test')
 })
 
 test('Browser API and stuff', () => {

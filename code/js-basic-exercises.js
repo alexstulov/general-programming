@@ -127,6 +127,22 @@ const isWithinRange = (num = 0) => ((num >= 20 && num <= 100) || num === 400)
 
 const arePositiveAndNegative = (num1 = 0, num2 = 0) => ((num1 > 0 && num2 < 0) || (num1 < 0 && num2 > 0))
 
+const checkPy = (str = '') => str.substring(0, 2).toLowerCase() === 'py' ? str : `Py${str}`
+
+const dropChar = (str = '', i = 0) => {
+  if (str.length < i + 1) return str
+  return str.substring(0, i) + str.substring(i + 1)
+}
+
+const switchFirstNLast = (str = 'a') => {
+  if (!str) throw new Error('str.length should be > 1')
+  if (str.length === 1) return str
+  if (str.length === 2) return str[1] + str[0]
+  return str[str.length - 1] + str.substring(1, str.length - 1) + str[0]
+}
+
+const isMultipleThreeOrSeven = (num = 0) => (num % 3 === 0 || num % 7 === 0)
+
 module.exports = {
   getCurrentDateNTime,
   triangleAreaBySides,
@@ -145,5 +161,9 @@ module.exports = {
   absDifference,
   isFifty,
   isWithinRange,
-  arePositiveAndNegative
+  arePositiveAndNegative,
+  checkPy,
+  dropChar,
+  switchFirstNLast,
+  isMultipleThreeOrSeven
 }
