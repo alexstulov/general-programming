@@ -22,7 +22,15 @@ const {
   checkPy,
   dropChar,
   switchFirstNLast,
-  isMultipleThreeOrSeven
+  isMultipleThreeOrSeven,
+  appendNPrependLastThree,
+  startsWithJava,
+  duplexInRange,
+  processScriptSubstring,
+  getMax,
+  getClosestToHundred,
+  twoInRage,
+  isCharInRange
 } = require('../code/js-basic-exercises.js')
 
 test('Date and time practice', () => {
@@ -51,6 +59,17 @@ test('Date and time practice', () => {
 })
 
 test('Math practice', () => {
+  expect(twoInRage()).toBe(false)
+  expect(twoInRage(10)).toBe(false)
+  expect(twoInRage(40)).toBe(false)
+  expect(twoInRage(0, 40)).toBe(false)
+  expect(twoInRage(40, 40)).toBe(true)
+  expect(twoInRage(40, 60)).toBe(true)
+  expect(twoInRage(40, 80)).toBe(true)
+  expect(twoInRage(70, 55)).toBe(true)
+  expect(twoInRage(40, 101)).toBe(false)
+  expect(twoInRage(101, 71)).toBe(false)
+
   expect(triangleAreaBySides().toFixed(1)).toBe('14.7')
   expect(triangleAreaBySides(2, 3, 4).toFixed(1)).toBe('2.9')
 
@@ -115,9 +134,41 @@ test('Math practice', () => {
   expect(isMultipleThreeOrSeven(2)).toBe(false)
   expect(isMultipleThreeOrSeven(4)).toBe(false)
   expect(isMultipleThreeOrSeven(5)).toBe(false)
+
+  expect(duplexInRange()).toBe(false)
+  expect(duplexInRange(1)).toBe(false)
+  expect(duplexInRange(1, 2)).toBe(false)
+  expect(duplexInRange(50)).toBe(true)
+  expect(duplexInRange(50, 1)).toBe(true)
+  expect(duplexInRange(70, 1)).toBe(true)
+  expect(duplexInRange(99, 1)).toBe(true)
+  expect(duplexInRange(1, 50)).toBe(true)
+  expect(duplexInRange(1, 70)).toBe(true)
+  expect(duplexInRange(1, 99)).toBe(true)
+
+  expect(() => getMax()).toThrow('Provide correct numbers')
+  expect(getMax(1)).toBe(1)
+  expect(getMax(1,2,3)).toBe(3)
+  expect(getMax(1000000, 1000, 10)).toBe(1000000)
+  expect(getMax(10, Infinity, 100)).toBe(Infinity)
+
+  expect(getClosestToHundred()).toBe(0)
+  expect(getClosestToHundred(100)).toBe(100)
+  expect(getClosestToHundred(0, 100)).toBe(100)
+  expect(getClosestToHundred(80, 120)).toBe(80)
+  expect(getClosestToHundred(10, 20)).toBe(20)
+
+
 })
 
 test('String practice', () => {
+  expect(isCharInRange()).toBe(false)
+  expect(isCharInRange('azaza')).toBe(true)
+  expect(isCharInRange('check it again')).toBe(false)
+  expect(isCharInRange('check it again','b')).toBe(false)
+  expect(isCharInRange('check it again','test')).toBe(false)
+  expect(isCharInRange('check it again','c')).toBe(true)
+
   expect(getFileExtension('test.exe')).toBe('exe')
   expect(getFileExtension('_.rar')).toBe('rar')
   expect(getFileExtension('.doc')).toBe('Invalid file name')
@@ -141,6 +192,23 @@ test('String practice', () => {
   expect(switchFirstNLast('ab')).toBe('ba')
   expect(switchFirstNLast('abc')).toBe('cba')
   expect(switchFirstNLast('test')).toBe('test')
+
+  expect(appendNPrependLastThree()).toBe('abcabcabc')
+  expect(() => appendNPrependLastThree('a')).toThrow('str.length should be >= 3')
+  expect(() => appendNPrependLastThree('ab')).toThrow('str.length should be >= 3')
+  expect(appendNPrependLastThree('test')).toBe('esttestest')
+  
+  expect(startsWithJava()).toBe(true)
+  expect(startsWithJava('testttt')).toBe(false)
+  expect(startsWithJava('')).toBe(false)
+  expect(startsWithJava('Java')).toBe(true)
+  expect(startsWithJava('JavaScript')).toBe(true)
+  expect(startsWithJava('Java programming language')).toBe(true)
+
+  expect(processScriptSubstring()).toBe('Script')
+  expect(processScriptSubstring('testScriptTest')).toBe('testTest')
+  expect(processScriptSubstring('testScript')).toBe('test')
+  expect(processScriptSubstring('    Script___')).toBe('    ___')
 })
 
 test('Browser API and stuff', () => {

@@ -143,6 +143,55 @@ const switchFirstNLast = (str = 'a') => {
 
 const isMultipleThreeOrSeven = (num = 0) => (num % 3 === 0 || num % 7 === 0)
 
+const appendNPrependLastThree = (str = 'abc') => {
+  if (str.length < 3) throw new Error('str.length should be >= 3')
+  const firstThree = str.substring(str.length - 3, str.length)
+  return firstThree + str + firstThree
+}
+
+const startsWithJava = (str = 'Java') => str.substring(0, 4) === 'Java'
+
+const duplexInRange = (a = 0, b = 0) => (a >=50 && a <=99) || (b >=50 && b <=99)
+
+const processScriptSubstring = (str = 'Script') => {
+  if (str.substring(4, 10) === 'Script') {
+    return str.substring(0, 4) + str.substring(10)
+  }
+  return str
+}
+
+const getMax = (...args) => {
+  if (!args.length) throw new Error('Provide correct numbers')
+  let max = -Infinity;
+  for (let i=0; i< args.length; i++) {
+    max = args[i]>max ? args[i] : max
+  }
+  return max
+}
+
+const getClosestToHundred = (a = 0, b = 0) => {
+  const diffA = Math.abs(100 - a)
+  const diffB = Math.abs(100 - b)
+
+  return diffA < diffB ? a : diffA === diffB ? Math.min(a, b) : b
+}
+
+const twoInRage = (a= 0, b=0) => {
+  const FORTY = 40, SIXTY = 60, SEVENTY = 70, HUNDRED = 100
+  let res = 0;
+  if ((a >= FORTY && a <= SIXTY) || (a >= SEVENTY && a <= HUNDRED)) {
+    res++;
+  }
+  if ((b >= FORTY && b <= SIXTY) || (b >= SEVENTY && b <= HUNDRED)) {
+    res++;
+  }
+
+  return res === 2
+}
+
+//Write a program to check whether a specified character exists within the 2nd to 4th position in a given string.
+const isCharInRange = (str = 'testIt', char = 'a') => str[2] === char || str[3] === char || str[4] === char
+
 module.exports = {
   getCurrentDateNTime,
   triangleAreaBySides,
@@ -165,5 +214,13 @@ module.exports = {
   checkPy,
   dropChar,
   switchFirstNLast,
-  isMultipleThreeOrSeven
+  isMultipleThreeOrSeven,
+  appendNPrependLastThree,
+  startsWithJava,
+  duplexInRange,
+  processScriptSubstring,
+  getMax,
+  getClosestToHundred,
+  twoInRage,
+  isCharInRange
 }
