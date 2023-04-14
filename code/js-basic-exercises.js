@@ -189,8 +189,42 @@ const twoInRage = (a= 0, b=0) => {
   return res === 2
 }
 
-//Write a program to check whether a specified character exists within the 2nd to 4th position in a given string.
 const isCharInRange = (str = 'testIt', char = 'a') => str[2] === char || str[3] === char || str[4] === char
+
+const isLastTwoDigitsSame = (a=10, b=10, c=10) => {
+  return a % 10 === b % 10 && b % 10 === c % 10
+}
+
+const setFirstThreeCharsCase = (a = 'TEST') => {
+  a=a.toString()
+  if (a.length < 3) {
+    return a.toUpperCase()
+  }
+  return a.substring(0, 3).toLowerCase() + a.substring(3)
+}
+
+const sumOfTwo = (a=0, b=0) => {
+  const sum = a+b
+  if (sum > 50 && sum < 80) {
+    return 65
+  }
+  return 80
+}
+
+const isEightRelated = (a=0, b=0) => {
+  const EIGHT = 8
+  return a === EIGHT || b === EIGHT || (a+b) === EIGHT || Math.abs(a-b) === EIGHT
+}
+
+const compareThreeeNumber = (a=0, b=0, c=0) => {
+  if (a === b && b === c) {
+    return 30
+  } else if (a === b || b === c || a === c) {
+    return 40
+  } else {
+    return 20
+  }
+}
 
 module.exports = {
   getCurrentDateNTime,
@@ -222,5 +256,10 @@ module.exports = {
   getMax,
   getClosestToHundred,
   twoInRage,
-  isCharInRange
+  isCharInRange,
+  isLastTwoDigitsSame,
+  setFirstThreeCharsCase,
+  sumOfTwo,
+  isEightRelated,
+  compareThreeeNumber
 }

@@ -30,7 +30,12 @@ const {
   getMax,
   getClosestToHundred,
   twoInRage,
-  isCharInRange
+  isCharInRange,
+  isLastTwoDigitsSame,
+  setFirstThreeCharsCase,
+  sumOfTwo,
+  isEightRelated,
+  compareThreeeNumber
 } = require('../code/js-basic-exercises.js')
 
 test('Date and time practice', () => {
@@ -59,6 +64,27 @@ test('Date and time practice', () => {
 })
 
 test('Math practice', () => {
+  expect(isEightRelated()).toBe(false)
+  expect(isEightRelated(8)).toBe(true)
+  expect(isEightRelated(0,8)).toBe(true)
+  expect(isEightRelated(3,5)).toBe(true)
+  expect(isEightRelated(11,3)).toBe(true)
+  expect(isEightRelated(2,4)).toBe(false)
+
+  expect(sumOfTwo()).toBe(80)
+  expect(sumOfTwo(55)).toBe(65)
+  expect(sumOfTwo(55, 10)).toBe(65)
+  expect(sumOfTwo(155, 10)).toBe(80)
+  expect(sumOfTwo(5, 10)).toBe(80)
+
+  expect(isLastTwoDigitsSame()).toBe(true)
+  expect(isLastTwoDigitsSame('')).toBe(true)
+  expect(isLastTwoDigitsSame(100)).toBe(true)
+  expect(isLastTwoDigitsSame(100, 200)).toBe(true)
+  expect(isLastTwoDigitsSame(100, 200, 300)).toBe(true)
+  expect(isLastTwoDigitsSame('10')).toBe(true)
+  expect(isLastTwoDigitsSame(10.123)).toBe(false)
+  
   expect(twoInRage()).toBe(false)
   expect(twoInRage(10)).toBe(false)
   expect(twoInRage(40)).toBe(false)
@@ -158,10 +184,19 @@ test('Math practice', () => {
   expect(getClosestToHundred(80, 120)).toBe(80)
   expect(getClosestToHundred(10, 20)).toBe(20)
 
-
+  expect(compareThreeeNumber()).toBe(30)
+  expect(compareThreeeNumber(1,2,3)).toBe(20)
+  expect(compareThreeeNumber(1,2,2)).toBe(40)
+  expect(compareThreeeNumber(1,1,2)).toBe(40)
+  expect(compareThreeeNumber(1,1,1)).toBe(30)
 })
 
 test('String practice', () => {
+  expect(setFirstThreeCharsCase()).toBe('tesT')
+  expect(setFirstThreeCharsCase('a')).toBe('A')
+  expect(setFirstThreeCharsCase('TeStIt')).toBe('testIt')
+  expect(setFirstThreeCharsCase(123)).toBe('123')
+
   expect(isCharInRange()).toBe(false)
   expect(isCharInRange('azaza')).toBe(true)
   expect(isCharInRange('check it again')).toBe(false)
