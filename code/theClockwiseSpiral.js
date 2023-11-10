@@ -22,7 +22,6 @@ const theClockwiseSpiral = (n) => {
     firstRow.push(i + 1)
   }
 
-  console.log(firstRow, limit)
   return [[]]
 }
 

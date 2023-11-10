@@ -35,7 +35,10 @@ const {
   setFirstThreeCharsCase,
   sumOfTwo,
   isEightRelated,
-  compareThreeeNumber
+  compareThreeeNumber,
+  checkIncreasingSequence,
+  compareByRightmostDigit,
+  whetherNumGreaterOthers
 } = require('../code/js-basic-exercises.js')
 
 test('Date and time practice', () => {
@@ -249,4 +252,35 @@ test('String practice', () => {
 test('Browser API and stuff', () => {
   expect(getURL()).toBe('http://localhost/')
   expect(makeVar('asdf')).toBe('Variable with user\'s name')
+})
+
+test('Check increasing sequence', () => {
+  expect(checkIncreasingSequence()).toBe(true)
+  expect(checkIncreasingSequence([10,15,31])).toBe(true)
+  expect(checkIncreasingSequence([22,22,31], 'soft')).toBe(true)
+  expect(checkIncreasingSequence([3,2,1], 'soft')).toBe(false)
+  expect(checkIncreasingSequence([1,1,1])).toBe(false)
+})
+
+test("If 2 or more numbers has same rightmost digit", () => {
+  expect(compareByRightmostDigit(1,2,3)).toBe(false)
+  expect(compareByRightmostDigit(1,1,3)).toBe(true)
+  expect(compareByRightmostDigit(1,2,1)).toBe(true)
+  expect(compareByRightmostDigit(1,2,2)).toBe(true)
+  expect(compareByRightmostDigit(21,22,23)).toBe(false)
+  expect(compareByRightmostDigit(21,21,23)).toBe(true)
+  expect(compareByRightmostDigit(21,22,22)).toBe(true)
+  expect(compareByRightmostDigit(21,22,21)).toBe(true)
+  expect(compareByRightmostDigit(1,22,333)).toBe(false)
+  expect(compareByRightmostDigit(1,21,333)).toBe(true)
+  expect(compareByRightmostDigit(2,21,331)).toBe(true)
+  expect(compareByRightmostDigit(1,22,331)).toBe(true)
+  expect(compareByRightmostDigit(1,21,331)).toBe(true) 
+})
+
+test("If one less than others and greater or equal 20", () => {
+  expect(whetherNumGreaterOthers(1,2,3)).toBe(false)
+  expect(whetherNumGreaterOthers(1,21,3)).toBe(false)
+  expect(whetherNumGreaterOthers(22,21,20)).toBe(true)
+  expect(whetherNumGreaterOthers(200,300,20)).toBe(true)
 })

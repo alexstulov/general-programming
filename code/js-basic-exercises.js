@@ -226,6 +226,33 @@ const compareThreeeNumber = (a=0, b=0, c=0) => {
   }
 }
 
+const checkIncreasingSequence = (seq=[1,2,3], mode="strict") => {
+  const [a,b,c] = seq
+  if (mode === 'strict')   {
+    return a < b && a < c && b < c
+  }
+
+  return a <= b && a <= c && b <= c
+}
+
+const getRightmostDigit = (a = 0) => parseInt(a.toString().split('').reverse()[0]);
+
+const compareByRightmostDigit = (a = 0, b = 0, c = 0) => {
+  const rightmostDigits = [
+    getRightmostDigit(a),
+    getRightmostDigit(b),
+    getRightmostDigit(c)
+  ]
+
+  return (new Set(rightmostDigits)).size < 3
+}
+
+const whetherNumGreaterOthers = (a= 0, b = 0, c = 0) => {
+  const [least, next] = [a,b,c].sort()
+  console.log(least, next)
+  return least < next && least >= 20
+}
+
 module.exports = {
   getCurrentDateNTime,
   triangleAreaBySides,
@@ -261,5 +288,8 @@ module.exports = {
   setFirstThreeCharsCase,
   sumOfTwo,
   isEightRelated,
-  compareThreeeNumber
+  compareThreeeNumber,
+  checkIncreasingSequence,
+  compareByRightmostDigit,
+  whetherNumGreaterOthers
 }
